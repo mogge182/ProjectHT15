@@ -1,0 +1,81 @@
+﻿@using System.Web.UI.HtmlControls
+@using PagedList.Mvc
+@using ProjectHT15.Models.Context
+@model PagedList.IPagedList<ProjectHT15.Models.ListReviewsModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+</head>
+<body>
+
+    @Html.Action("SearchResult", "Start")
+    <div>
+        <table id="tableTosort" class="tablesorter">
+            <thead>
+                <tr>
+                    <th id="sortTitels">
+                        <p>Title</p>
+                    </th>
+                    <th id="sortTitels">
+                        <p>Creator</p>
+                    </th>
+                    <th id="sortTitels">
+                        <p>Likes</p>
+                    </th>
+                    <th id="sortTitels">
+                        <p>Rating</p>
+                    </th>
+                    <th id="sortTitels">
+                        <p>Type</p>
+                    </th>
+                    <th id="sortTitels">
+                        <p>Overall rating</p>
+                    </th>
+                    <th id="sortTitels">
+                        <p>Date</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="col-lg-2">@Html.ActionLink(item.Title, "ReadReview", "Review", new { id = item.Id }, null)</td>
+                        <td class="col-lg-2">@Html.ActionLink(item.Username, "UsersReviews", "Review", new { id = item.UserId }, null)</td>
+                        <td class="col-lg-2"><p>@Html.LabelForModel(item.Likes.ToString())</p></td>
+                        <td class="col-lg-2"><p>@Html.LabelForModel(item.UserRating.ToString())</p></td>
+                        <td class="col-lg-2"><p>@Html.LabelForModel(item.Type)</td>
+                        <td class="col-lg-2"><p>@Html.LabelForModel(item.OverallRating.ToString())</p></td>
+                        <td class="col-lg-2"><p>@Html.LabelForModel(item.Date.ToShortDateString())</p></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+        <div id="pagedList">
+            Page @(Model.PageCount < Model.PageCount ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#test"))
+        </div>
+   
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tableTosort").tablesorter();
+    }
+);
+
+</script>

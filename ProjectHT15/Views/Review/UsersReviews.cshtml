@@ -1,0 +1,70 @@
+﻿@model ProjectHT15.Models.UserReviewsModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UsersReviews</title>
+</head>
+<body>
+
+
+    <h1>User: @Model.UserName </h1>
+    <h4>Firstname: @Model.FirstName</h4>
+    <h4>Lastname: @Model.LastName</h4>
+<p>Email:<a href="mailto:@Model.Email">@Model.Email</a>
+</p>
+
+
+<div id="UserReviewBox">
+        <table>
+            <tr>
+                <th id="sortTitels" class="col-lg-2">
+                    @Html.ActionLink("Date", "Index", new { id = "Titel" })
+                </th>
+                <th class="col-lg-2">
+                    Titel
+                </th>
+                <th class="col-lg-2">
+                    Rating
+                </th>
+                <th class="col-lg-2">
+                    Likes
+                </th>
+                <th class="col-lg-2">
+                    Type
+                </th>
+            </tr>
+            @foreach (var item in Model.List)
+            {
+
+                <tr>
+                    <td>
+                        @item.CreatedDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Title, "ReadReview", "Review", new { id = item.Id }, null)
+                    </td>
+                    <td>
+                        @item.UserRating
+                    </td>
+                    <td>
+                        @item.LikeCount
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</body>
+</html>

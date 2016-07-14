@@ -1,0 +1,75 @@
+﻿@using System.Diagnostics.Eventing.Reader
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/_LayoutCSS.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <link href="~/Content/simple-sidebar.css" rel="stylesheet" />
+</head>
+<body>
+    @if (Session["LoggedIn"] == null)
+    {
+        <div class="container">
+            <div class="welcome">
+                <img src="~/Images/book.png"/>
+            </div>
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+        <div class="container">
+            <footer>
+                @DateTime.Now
+            </footer>
+        </div>
+
+
+    }
+
+    @if (Session["LoggedIn"] != null)
+    {
+
+        <div class="container">
+            <div class="welcome">
+                <img src="~/Images/book.png"/>
+            </div>
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        @Html.ActionLink("Start", "Index", "Start", "", new {@class = "btn btn-default"})
+                        @Html.ActionLink("New Review", "NewReview", "Review", "", new {@class = "btn btn-default"})
+                        @Html.ActionLink("My Page", "MyPage", "Start", "", new {@class = "btn btn-default"})
+                        @Html.ActionLink("Log out!", "logout", "Home")
+                    </div>
+                </div>
+            </nav>
+
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+        <div class="container">
+            <footer>
+                @DateTime.Now
+            </footer>
+        </div>
+    }
+
+</body>
+
+
+
+</html>

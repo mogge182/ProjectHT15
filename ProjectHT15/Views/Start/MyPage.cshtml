@@ -1,0 +1,134 @@
+﻿@using ProjectHT15.Models
+@using ProjectHT15.Models.Context
+@model ProjectHT15.Models.EditMyInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = (LoggedInUserModel)Session["LoggedIn"];
+
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyPage</title>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-confirm.min.js"></script>
+    <link href="~/Content/jquery-confirm.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    @using (Html.BeginForm("UpdateMyPage", "Start"))
+    {
+        <div class="form-group">
+            <div class="col-lg-6">
+                <div class="col-lg-12">
+                    @Html.DisplayNameFor(x => x.UserName)
+                    @Html.ValidationMessageFor(x => x.UserName)@ViewBag.UserNameError
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", Value = @user.UserName })
+                </div>
+                <div class="col-lg-6">
+                    @Html.DisplayNameFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", Value = user.FirstName })
+                </div>
+                <div class="col-lg-6">
+                    @Html.DisplayNameFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.LastName)
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", Value = user.LastName })
+                </div>
+                <div class="col-lg-12">
+                    @Html.DisplayNameFor(x => x.Email)
+                    @Html.ValidationMessageFor(x => x.Email)@ViewBag.EmailError
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", Value = user.Email })
+                </div>
+                <div class="col-lg-6">
+                    @Html.DisplayNameFor(x => x.Password)
+                    @Html.ValidationMessageFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                </div>
+                <div class="col-lg-6">
+                    @Html.DisplayNameFor(x => x.ConfirmPassword)
+                    @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <input id="btnRegister" type="submit" value="Update" class="btn btn-info btm-sm glyphicon" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        //@Html.ActionLink("Delete", "DeleteUser", "Start", new { id = user.UserId }, new { @class = "btn btn-danger btm-sm glyphicon", style = "float: right" })
+    }
+    <input id="btnDeleteUser" type="submit" name="btnDeleteUser" value="Delete"/>
+    @Html.Hidden("hiddenUserId", user.UserId)
+
+     <table class="col-lg-12">
+        <thead>
+        <tr>
+            <th>
+                <input id="btnDelete" type="submit" value="Delete selected reviews!" class="btn btn-danger btm-sm glyphicon"/>
+            </th>
+        </tr>
+
+        </thead>
+        <tbody >
+        <tr>
+            <td>
+                <div id="myReviewsBox">
+                    @Html.Action("ReviewResult","Review", new List<Review>())
+                </div>
+            </td>
+           
+        </tr>
+        </tbody>
+
+        @*<div id="myReviewsBox" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+           
+        </div>*@
+    </table>
+
+@*<div>
+
+        <div id="myReviewsBox">
+            @Html.Action("ReviewResult", "Review", new List<Review>())
+        </div>
+        <input id="btnDelete" type="submit" name="btnDelete" value="Remove Reviews" />
+    </div>*@
+
+</body>
+</html>
+<script>
+
+    $(document).ready(function () {
+        $('#btnDeleteUser').click(OnDelete);
+    });
+
+    function OnDelete() {
+        var id = $('#hiddenUserId').val();
+        $.confirm({
+            title: 'You are about to delete yourself',
+            content: 'Confirm that you would like to delete yourself.',
+            confirm: function () {
+                $.ajax({
+                    url: '/Start/DeleteUser/',
+                    data: { 'id': id }
+                });
+            },
+            cancel: function () {
+
+            }
+
+        });
+
+
+    }
+
+</script>

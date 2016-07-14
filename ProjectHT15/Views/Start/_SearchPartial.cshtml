@@ -1,0 +1,30 @@
+﻿@model List<string>
+<head>
+    <title>_SearchPartial</title>
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet"/>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+</head>
+
+<div style="float: right;">
+    <div class="ui-widget">
+
+        <label for="title">Search title: </label>
+        @using (Html.BeginForm("SearchTitle","Start"))
+        {
+            @Html.TextBox("title")
+            <input id="btnSearch" type="submit" name="btnSearch" value="Go" />
+           
+        }
+      
+    </div>
+</div>
+
+<script>
+    $(function() {
+        var availableTags = @(Html.Raw(Json.Encode(this.Model.ToArray())))
+        $( "#title" ).autocomplete({
+            source: availableTags
+        });
+    });
+</script>

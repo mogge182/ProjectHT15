@@ -1,0 +1,42 @@
+﻿@using System.Web.UI.WebControls
+@using PagedList.Mvc
+@using ProjectHT15.Models.Context
+@model List<ProjectHT15.Models.CommentToReviewModel>
+
+
+<script src="~/Scripts/AJAXscript.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+
+<div>
+    <div id="commentBox">
+        @foreach (var comment in Model)
+            {
+            <div style="border: solid; margin: 2px;">
+                <table>
+                    <thead>
+                    <tr>
+                        <td width="20%">
+                            @comment.UserName
+                        </td>
+                        <td width="20%">
+                            @comment.CreatedDate
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                @comment.Comment
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+               
+                </div>
+        }
+
+    </div>
+</div>

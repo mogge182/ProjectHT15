@@ -1,0 +1,84 @@
+﻿@model ProjectHT15.Models.ReadReviewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Liked = "btn glyphicon glyphicon-thumbs-up";
+    string notLiked = "btn glyphicon glyphicon-hand-right";
+    string LikeOrNot = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ReadReview</title>
+</head>
+<body>
+
+
+    <div style="border: solid;">
+
+        <div class="col-lg-6">
+            @Html.DisplayTextFor(x => x.CreatedDate)
+            <h1>
+                @Html.DisplayTextFor(x => x.Title)
+            </h1>
+            <div id="descriptionBox">
+                <p>
+                    @Html.DisplayTextFor(x => x.Description)
+                </p>
+            </div>
+
+            <p>
+                @Html.DisplayTextFor(x => x.Type)
+            </p>
+            <table>
+                <tr>
+                    <td>
+                        @if (Model.HasLiked)
+                        {
+                            LikeOrNot = Liked;
+                        }
+                        else
+                        {
+                            LikeOrNot = notLiked;
+                        }
+                        @Html.ActionLink(" ", "LikeOrNot", "Review", new { id = Model.Id }, new
+               {
+                   @class = LikeOrNot
+               })
+
+                        @Html.Label(Model.LikeCount.ToString())
+                    <td>@Html.ActionLink(Model.ReviewRating.ToString(), "WhoHasRated", "Review", new {id = Model.Id},null)</td>
+
+                    <td width="20%">
+                        Rate:
+                        @for (int i = 1; i < 6; i++)
+                        {
+                            @Html.ActionLink(i.ToString() + " ", "RateReview", "Review", new { rating = i, id = Model.Id }, null)
+                        }
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div id="test" class="col-lg-12">
+            @Html.Action("Comments", "Review", new { id = Model.Id })
+        </div>
+        @using (Html.BeginForm("AddComment", "Review"))
+        {
+            <div>
+                @Html.TextArea("Comment")
+            </div>
+            @Html.Hidden("id", new { id = Model.Id })
+            <div>
+                <input type="submit" name="Comment" value="Comment" />
+            </div>
+        }
+
+    </div>
+</body>
+</html>

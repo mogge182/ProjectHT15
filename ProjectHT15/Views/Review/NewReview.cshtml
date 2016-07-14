@@ -1,0 +1,107 @@
+﻿@using System.Web.UI.HtmlControls
+@using ProjectHT15.Models.Context
+@model ProjectHT15.Models.ReviewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NewRecension</title>
+</head>
+<body>
+    
+        @using (Html.BeginForm("AddReview", "Review"))
+        {
+
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.CreatedDate)
+            @Html.HiddenFor(x => x.CreatorUserId)
+
+           
+                <div id="rwTitle" class="col-lg-12 col-md-12 col-sm-7">
+                    @Html.DisplayNameFor(x => x.Title)
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                </div>
+            <div class="col-lg-12">
+                <input id="btnReview" type="submit" value="Add/Update" class="btn btn-info" />
+                @Html.ActionLink("New", "NewReview", null, new {@class = "btn btn-info", id = "btnNewReview"})
+            </div>
+               
+                <div id="rwDescription" class="col-lg-5 col-md-6 col-sm-8 col-xs-12">
+                    @Html.DisplayNameFor(x => x.Description)
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+
+                </div>
+            
+          
+                <div id="radioDiv" class="col-xs-6">
+                    <p>Rating @Html.ValidationMessageFor(x => x.UserRating)</p>
+                    @for (int i = 1; i <= 5; i++)
+                {
+                    if (ViewBag.Radio == i)
+                    {
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(x => x.UserRating, @i, new { @id = @i, @checked = true })@i
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(x => x.UserRating, @i, new { @id = @i })@i
+                            </div>
+                        }
+
+                    }
+                </div>
+              
+                <div class="col-lg-6 col-md-10 col-sm-12 col-xs-12">
+                    <div class="col-lg-9 col-md-6 col-sm-6 col-xs-12">
+                        <div id="rwType">
+                            @Html.DropDownListFor(x => x.Type, new List<SelectListItem>()
+                    {
+                        new SelectListItem()
+                        {
+                            Text = "Movie",
+                            Value = "Movie"
+                        },
+                        new SelectListItem()
+                        {
+                            Text = "Book",
+                            Value = "Book"
+                        },
+                        new SelectListItem()
+                        {
+                            Text = "Game",
+                            Value = "Game"
+                        }
+                    }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <table class="col-lg-6">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input id="btnDelete" type="submit" value="Delete selected reviews!" class="btn btn-danger btm-sm glyphicon" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div id="myReviewsBox">
+                                    @Html.Action("ReviewResult", new List<Review>())
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+        }
+    
+   
+</body>
+</html>

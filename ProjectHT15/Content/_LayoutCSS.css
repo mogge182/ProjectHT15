@@ -1,0 +1,203 @@
+﻿html,
+body {
+    background-color: papayawhip;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+#wrapper {
+    min-height: 100%;
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 45px; /* Needed for fixed headers/menu 
+    padding-bottom: 60px;  Height of the footer */
+}
+
+footer {
+    margin-top: 20px;
+    margin-bottom: 0;
+    position: relative;
+    bottom: 0;
+    height: 65px;
+    width: 100%;
+    border-top: solid 1px lightskyblue;
+}
+
+    /*footer .col-x {
+        width: 100%;
+    }*/
+
+  
+
+/*#content {
+    float: left;
+    margin: 10px;
+    border: dotted red;
+}*/
+
+
+
+#btnRegister {
+    margin:1px;
+}
+
+#txtReg {
+    padding: 10px;
+}
+
+/*Recensioner CSS*/
+#radioDiv {
+    width: 230px;
+}
+
+#rwTitle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+    
+}
+
+#rwType {
+    margin-top: 10px;
+    margin-left: -20px;
+    margin-bottom: 50px;
+}
+
+textarea {
+    position: relative;
+    max-width: 400px;
+    min-width: 200px;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+#btnReview {
+    margin-top: 10px;
+}
+
+#btnDelete {
+    margin: 10px;
+   
+}
+
+.welcome img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+#login {
+    margin: 0 auto;
+}
+/*StartCSS*/
+
+#reviewBox {
+    overflow: auto;
+    height: 450px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#reviews {
+    height: auto;
+    border-bottom-style: solid;
+}
+
+#pagedList {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#text {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: transparent;
+    max-width: 200px;
+    max-height: 100px;
+}
+
+#textBox {
+    min-width: 200px;
+    height: auto;
+}
+
+#rating {
+    min-height: 20%;
+    border-top-style: solid;
+    border-bottom: solid;
+}
+
+#commentBox {
+    max-height: 200px;
+    min-height: 200px;
+    max-width: 100%;
+    min-width: 100%;
+    overflow-y: scroll;
+}
+
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+}
+
+
+
+p {
+    color: lightskyblue;
+}
+
+    
+
+a {
+    color: lightskyblue;
+}
+
+    a:hover {
+        color: green;
+    }
+
+#myReviewsBox {
+    max-width: 300px;
+    border: solid deepskyblue 1px;
+    overflow-y: scroll;
+    max-height: 100px;
+    margin-left: 10px;
+    padding: 10px;
+}
+#MultiBox {
+    min-height: 200px;
+    max-height: 500px;
+    border: solid black;
+    overflow-y: scroll;
+}
+#UserReviewBox {
+    min-height: 200px;
+    max-height: 400px;
+    border: solid black;
+    overflow-y: scroll;
+    padding: 5px;
+    border: solid lightskyblue 1px;
+}
+#descriptionBox {
+    min-height: 200px;
+    border: solid lightskyblue 1px;
+}
+#tableTosort {
+    min-width: 70%;
+}
+#btnNewReview {
+    margin-top: 10px;
+}
+
